@@ -28,6 +28,16 @@ void Window::windowStart()
 		{
 			if (event.type == sf::Event::Closed)
 				window->close();
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+			{
+
+				IScene::setCurrentScene("Game");
+			}
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+			{
+
+				IScene::setCurrentScene("Menu");
+			}
 		}
 		IScene::getCurrentScene()->updateScene();
 		window->clear();
@@ -42,13 +52,18 @@ void Window::init()
 
 	IScene::setTarget(*window);
 	
-	Menu* menu = new Menu;
-	menu->setSceneName("Menu");
-	IScene::bindNewScene(menu);
+	Menu* menuScene = new Menu;
+	menuScene->setSceneName("Menu");
+	
+	IScene::bindNewScene(menuScene);
 	IScene::setCurrentScene("Menu");
 
-
+	Game* gameScene = new Game;
+	gameScene->setSceneName("Game");
+	IScene::bindNewScene(gameScene);
 	
+
+
 
 
 

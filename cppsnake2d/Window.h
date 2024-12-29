@@ -13,7 +13,7 @@
 
 
 #include "Menu.h"
-
+#include "Game.h"
 
 
 class Window

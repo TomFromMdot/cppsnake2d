@@ -20,16 +20,10 @@ public:
 	static void setCurrentScene(const std::string& n);
 
 	static void addActorToScene(AActor* actor, AScene* target);
-	static void removeActorFromScene(const std::string& n);
+
 
 
 private:
-
-	/*
-	*	Check current scene
-	*	If currentScene is nullptr return void to stop other metods
-	*/
-	static inline void checkCurrentScene();
 
 	static AScene* currentScene;
 	static sf::RenderWindow* targetWindow;

@@ -21,13 +21,12 @@ public:
 
 	/*Virtual Methods*/
 
-	virtual void vInitScene();
-	virtual void vUpdateScene();
-	virtual void vDrawScene();
+	virtual void vInitScene() = 0;
+	virtual void vUpdateScene() = 0;
+	virtual void vDrawScene() = 0;
 
 	/* Get Methods */
 
-	bool isLoaded();
 	std::string getSceneName();
 	std::vector<AActor*> getSceneActors();
 

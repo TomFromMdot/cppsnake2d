@@ -12,5 +12,5 @@ void Player::init()
 
 void Player::update()
 {
-	std::cout << "Update " << getActorName()->c_str() << "\n";
+
 }

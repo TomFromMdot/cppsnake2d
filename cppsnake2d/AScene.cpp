@@ -5,10 +5,7 @@ AScene::~AScene()
 	std::cout << sceneName << " was deleted !\n";
 }
 
-bool AScene::isLoaded()
-{
-	return isLoad;
-}
+
 
 std::string AScene::getSceneName()
 {
@@ -38,6 +35,15 @@ void AScene::addActor(AActor* a)
 
 inline void AScene::actorsPlay(ESceneAction state)
 {
+	if (state == CLOSE)
+	{
+		for (int it = 0; it != sceneActors.size(); it++)
+		{
+			std::cout << "Remove: " << sceneActors[it]->getActorName()->c_str() << " from " << sceneName << "\n";
+			delete sceneActors[it];
+		}
+		sceneActors.clear();
+	}
 	
 	if (state == INIT && isLoad == false)
 	{
@@ -57,7 +63,7 @@ inline void AScene::actorsPlay(ESceneAction state)
 	{
 		if (state == UPDATE && isLoad == true)
 		{
-			std::cout << "Scene state: update\n";
+
 			if (sceneActors.size() == 0)
 			{
 				std::cout << "Zero actors !\n";
@@ -70,7 +76,7 @@ inline void AScene::actorsPlay(ESceneAction state)
 		}
 		if (state == DRAW && isLoad == true)
 		{
-			std::cout << "Scene state: draw\n";
+
 			if (sceneActors.size() == 0)
 			{
 				std::cout << "Zero actors !\n";
@@ -83,15 +89,6 @@ inline void AScene::actorsPlay(ESceneAction state)
 				}
 			else
 				std::cout << "Cannot find window target\n";
-		}
-		if (state == CLOSE)
-		{
-			std::cout << "Scene state: draw\n";
-			for (int it = 0; it != sceneActors.size(); it++)
-			{
-				std::cout << "Unload actor: " << sceneActors[it]->getActorName() << "\n";
-				sceneActors.erase(sceneActors.begin() + it);
-			}
 		}
 	}
 }
@@ -106,20 +103,6 @@ inline bool AScene::checkActorsCount()
 	return true;
 }
 
-void AScene::vInitScene()
-{
-
-}
-
-void AScene::vUpdateScene()
-{
-
-}
-
-void AScene::vDrawScene()
-{
-
-}
 
 void AScene::initScene(sf::RenderWindow* window)
 {
@@ -135,20 +118,18 @@ void AScene::initScene(sf::RenderWindow* window)
 
 void AScene::updateScene()
 {
-	std::cout << "update " << sceneName << "\n";
 	vUpdateScene();
 	actorsPlay(UPDATE);
 }
 
 void AScene::drawScene()
 {
-	std::cout << "draw" << sceneName << "\n";
 	vDrawScene();
 	actorsPlay(DRAW);
 }
 
 void AScene::closeScene()
 {
-	std::cout << "close " << sceneName << "\n";
-	actorsPlay(CLOSE);
+	isLoad = false;
+	std::cout << "unload\n";
 }

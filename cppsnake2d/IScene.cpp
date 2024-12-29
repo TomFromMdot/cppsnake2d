@@ -32,14 +32,15 @@ AScene* IScene::getCurrentScene()
 
 void IScene::setCurrentScene(const std::string& n)
 {
-	
 	if (!n.empty())
 	{
 		for (int it = 0; it != scenesList.size(); it++)
 		{
-			if (scenesList[it]->getSceneName().c_str() == n)
+			if (scenesList[it]->getSceneName().c_str() == n )
 			{
-				std::cout << "Set current scene: " << scenesList[it]->getSceneName().c_str() << " \n";
+				if(currentScene != nullptr)
+					currentScene->closeScene();
+				std::cout << "Set current scene: " << scenesList[it]->getSceneName()<< " \n";
 				currentScene = scenesList[it];
 				return;
 			}
@@ -58,16 +59,5 @@ void IScene::addActorToScene(AActor* actor, AScene* target)
 	}
 }
 
-void IScene::removeActorFromScene(const std::string& n)
-{
 
-}
 
-inline void IScene::checkCurrentScene()
-{
-	if (currentScene == nullptr)
-	{
-		std::cout << "Current scene is nullptr\n";
-		return;
-	}
-}
